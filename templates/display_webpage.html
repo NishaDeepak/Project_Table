@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Displaying webpages</title>
+</head>
+<body>
+    <center>
+        <h1>Displaying the data of webpage model</h1>
+        <table border="1px">
+            <tr><th>Topic_name</th>
+                <th>Name</th>
+                <th>URL</th>
+            </tr>
+            {% for webpage in webpages %}
+            <tr><td>{{webpage.topic_name}}</td>
+                <td>{{webpage.name}}</td>
+                <td>{{webpage.url}}</td></tr>
+            {% endfor %}
+        </table>
+    </center>  
+</body>
+</html>
