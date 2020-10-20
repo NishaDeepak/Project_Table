@@ -46,3 +46,53 @@ def update_webpage(request):
     Webpage.objects.update_or_create(name='Lucy',defaults={'topic_name':t,url:'https://lucy.com'})
     webpages=Webpage.objects.all()
     return render(request,'display_webpage.html',context={'webpages':webpages})
+
+def web_form(request):
+    if request.method=="POST":
+        #print(request.POST)
+        topic=request.POST['topic']
+        webpages=Webpage.objects.filter(topic_name=topic)
+        return render(request,'display_webpage.html',context={'webpages':webpages})
+    return render(request,'web_form.html')
+
+def create_topic(request):
+    if request.method=='POST':
+        topic=request.POST.get('topic')
+        Topic.objects.get_or_create(topic_name=topic)[0]
+        topics=Topic.objects.all()
+        return render(request,'display_topic.html',context={'topics':topics})
+    return render(request,'create_topic.html')
+
+def create_webpage(request):
+    topics=Topic.objects.all()
+    if request.method=='POST':
+        top=request.POST['top']
+        name=request.POST['name']
+        url=request.POST['url']
+        t=Topic.objects.get_or_create(topic_name=top)[0]
+        t.save()
+        w=Webpage.objects.get_or_create(topic_name=t,name=name,url=url)[0]
+        w.save()
+        webpages=Webpage.objects.all()
+        return render(request,'display_webpage.html',context={'webpages':webpages})
+    return render(request,'create_webpage.html',context={'topics':topics})
+
+def multi_select(request):
+    topics=Topic.objects.all()
+    if request.method=='POST':
+        topic=request.POST.getlist('topic')
+        webpages=Webpage.objects.none()
+        for i in topic:
+            webpages=webpages|Webpage.objects.filter(topic_name=i)
+            return render(request,'display_webpage.html',context={'webpages':webpages})
+    return render(request,'multi_select.html',context={'topics':topics})
+
+def checkbox(request):
+    topics=Topic.objects.all()
+    return render(request,'checkbox.html',context={'topics':topics})        
+
+        
+        
+        
+        
+        

@@ -23,4 +23,9 @@ urlpatterns = [
     path('display_access/',views.display_access,name='display_access'),
     path('delete_webpage/',views.delete_webpage,name='delete_webpage'),
     path('update_webpage/',views.update_webpage,name='update_webpage'),
+    path('web_form/',views.web_form,name='web_form'),
+    path('create_topic/',views.create_topic,name='create_topic'),
+    path('create_webpage/',views.create_webpage,name='create_webpage'),
+    path('multi_select/',views.multi_select,name='multi_select'),
+    path('checkbox/',views.checkbox,name='checkbox'),
 ]

@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+        <h1>Displaying the topics and collecting multiple options</h1>
+        <form action='{% url "multi_select" %}' method="POST">
+            {% csrf_token %}
+            Topic_name:
+            {% for topic in topics %}
+            <h1>{{topic.topic_name}}
+            <input type="checkbox" name="topic" id="topic" value="{{topic}}"><br>
+        </h1>
+            {% endfor %}
+            <input type="submit" value="Submit">
+        </form>
+    </center>
+</body>
+</html>
